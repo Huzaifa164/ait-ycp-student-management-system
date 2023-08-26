@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const AdminNavBar = () => {
   return (
     <>
       <div
@@ -11,7 +11,7 @@ const NavBar = () => {
         aria-orientation="vertical"
       >
         <NavLink
-          to="/attendence"
+          to="/register-student"
           className="nav-link"
           id="v-pills-home-tab"
           data-toggle="pill"
@@ -20,10 +20,10 @@ const NavBar = () => {
           aria-controls="v-pills-home"
           aria-selected="true"
         >
-          Attendence
+          Register Student
         </NavLink>
         <NavLink
-          to="/assignments"
+          to="/generate-attendence-report"
           className="nav-link"
           id="v-pills-profile-tab"
           data-toggle="pill"
@@ -32,10 +32,10 @@ const NavBar = () => {
           aria-controls="v-pills-profile"
           aria-selected="false"
         >
-          Assignments
+          Generate Attendence Report
         </NavLink>
         <NavLink
-          to="/schedule"
+          to="/create-schedule"
           className="nav-link"
           id="v-pills-messages-tab"
           data-toggle="pill"
@@ -44,21 +44,10 @@ const NavBar = () => {
           aria-controls="v-pills-messages"
           aria-selected="false"
         >
-          Schedule
+          Create Schedule
         </NavLink>
-        <a
-          className="nav-link"
-          id="v-pills-settings-tab"
-          data-toggle="pill"
-          href="#v-pills-settings"
-          role="tab"
-          aria-controls="v-pills-settings"
-          aria-selected="false"
-        >
-          Feedback
-        </a>
         <NavLink
-          to="/notification"
+          to="/push-notification"
           className="nav-link"
           id="v-pills-settings-tab"
           data-toggle="pill"
@@ -67,11 +56,23 @@ const NavBar = () => {
           aria-controls="v-pills-settings"
           aria-selected="false"
         >
-          Notification
+          Push Notification
+        </NavLink>
+        <NavLink
+          to="/generate-student-report"
+          className="nav-link"
+          id="v-pills-settings-tab"
+          data-toggle="pill"
+          href="#v-pills-settings"
+          role="tab"
+          aria-controls="v-pills-settings"
+          aria-selected="false"
+        >
+          Generate Student Report
         </NavLink>
       </div>
     </>
   );
 };
 
-export default NavBar;
+export default AdminNavBar;

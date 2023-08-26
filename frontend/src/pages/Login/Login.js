@@ -1,13 +1,33 @@
-import React from "react";
-import "./Login.css";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
+  const [captchaText, setCaptchaText] = useState("");
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (validateCaptcha(captchaText) === true) {
+      alert("Captcha Matched");
+    } else {
+      alert("Captcha Does Not Match");
+    }
+  };
+
   return (
     <>
       <section className="vh-100 login">
-        <h1 className="heading">YCP DATABASE MANAGEMENT</h1>
-        <div className="container-fluid h-custom">
+        <h1 className="heading text-center">YCP DATABASE MANAGEMENT</h1>
+        <div className="container-fluid h-custom mb-5">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
@@ -17,7 +37,7 @@ const Login = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form className="login-form">
+              <form className="form " onSubmit={handleLogin}>
                 <img src="./images/ycp-logo.jpeg" className="logo mb-5" />
                 <div className="form-outline mb-4">
                   <input
@@ -34,6 +54,18 @@ const Login = () => {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    required
+                  />
+                </div>
+                <div className="form-outline mb-3">
+                  <LoadCanvasTemplate />
+                  <input
+                    type="text"
+                    id="user_captcha_input"
+                    className="form-control form-control-lg"
+                    placeholder="Enter above captcha"
+                    value={captchaText}
+                    onChange={(e) => setCaptchaText(e.target.value)}
                     required
                   />
                 </div>
@@ -55,7 +87,7 @@ const Login = () => {
                 </div>
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >
