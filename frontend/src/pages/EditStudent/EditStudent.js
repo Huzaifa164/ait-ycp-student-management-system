@@ -1,43 +1,32 @@
-import React from "react";
-import AdminHeader from "../../components/AdminHeader/AdminHeader";
-import AdminNavBar from "../../components/AdminNavBar/AdminNavBar";
-import Footer from "../../components/Footer/Footer";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import AdminHeader from '../../components/AdminHeader/AdminHeader'
+import AdminNavBar from '../../components/AdminNavBar/AdminNavBar'
+import Footer from '../../components/Footer/Footer'
+import { useNavigate } from 'react-router-dom'
 
-const RegisterStudent = () => {
-  const navigate = useNavigate();
-  const handleUpload = (e) => {
-    e.preventDefault();
-  };
+const EditStudent = () => {
+    const navigate = useNavigate();
 
-  const handleAdd = (e) => {
-    e.preventDefault();
-    navigate("/student-login");
-  };
-
+    const handleEdit = (e) => {
+        e.preventDefault();
+        navigate('/generate-student-report');
+    }
   return (
-    <>
-      <section className="vh-100 login">
-        <h1 className="heading text-center">YCP DATABASE MANAGEMENT</h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <h1 className="mt-5">Register Student</h1>
-          <form
+    <div className='dashboard'>
+      <AdminHeader />
+      <div className="main">
+        <AdminNavBar />
+        <div className="bg-light content-section">
+            <h2 className='mt-3 text-center mb-5'>Edit Student</h2>
+            <form
             className="w-75 mx-auto form register-student-form my-5"
-            onSubmit={handleAdd}
+            onSubmit={handleEdit}
           >
             <div className="form-group">
               <input
                 type="number"
                 className="form-control"
                 placeholder="Enter PRN"
-                required
               />
             </div>
             <div className="row form-group">
@@ -46,7 +35,6 @@ const RegisterStudent = () => {
                   type="text"
                   className="form-control"
                   placeholder="First name"
-                  required
                 />
               </div>
               <div className="col">
@@ -54,7 +42,6 @@ const RegisterStudent = () => {
                   type="text"
                   className="form-control"
                   placeholder="Last name"
-                  required
                 />
               </div>
             </div>
@@ -65,7 +52,6 @@ const RegisterStudent = () => {
                 className="form-control"
                 id="exampleInputDOB"
                 placeholder="Enter DOB"
-                required
               />
             </div>
             <div className="form-group">
@@ -81,7 +67,6 @@ const RegisterStudent = () => {
                 className="form-control"
                 id="exampleInputEmail1"
                 placeholder="Enter email"
-                required
               />
             </div>
             <div className="form-group">
@@ -89,7 +74,6 @@ const RegisterStudent = () => {
                 type="number"
                 className="form-control"
                 placeholder="Enter Phone number"
-                required
               />
             </div>
             <div className="form-group">
@@ -100,7 +84,6 @@ const RegisterStudent = () => {
                 type="month"
                 className="form-control"
                 id="exampleInputMonth"
-                required
               />
             </div>
             <div className="form-group">
@@ -108,7 +91,6 @@ const RegisterStudent = () => {
                 type="text"
                 className="form-control"
                 placeholder="Enter City"
-                required
               />
             </div>
             <div className="form-group">
@@ -153,23 +135,15 @@ const RegisterStudent = () => {
                 placeholder="Enter Work Experience (In years)"
               />
             </div>
-            <div className="form-group">
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Enter Password"
-              />
-            </div>
             <button type="submit" className="btn btn-primary d-block w-100">
-              Add
+              Edit
             </button>
           </form>
         </div>
-        <Footer />
-      </section>
-    </>
-  );
-};
+      </div>
+      <Footer />
+    </div>
+  )
+}
 
-export default RegisterStudent;
+export default EditStudent

@@ -19,6 +19,20 @@ const GenerateAttendenceReport = () => {
               Generate
             </button>
           </form>
+          <table className="table table-bordered mt-5 w-50 mx-auto">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">PRN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">12/12/12</th>
+                <td>230343420027</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <Footer />

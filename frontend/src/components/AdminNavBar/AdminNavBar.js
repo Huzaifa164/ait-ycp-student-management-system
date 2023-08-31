@@ -11,18 +11,6 @@ const AdminNavBar = () => {
         aria-orientation="vertical"
       >
         <NavLink
-          to="/register-student"
-          className="nav-link"
-          id="v-pills-home-tab"
-          data-toggle="pill"
-          href="#v-pills-home"
-          role="tab"
-          aria-controls="v-pills-home"
-          aria-selected="true"
-        >
-          Register Student
-        </NavLink>
-        <NavLink
           to="/generate-attendence-report"
           className="nav-link"
           id="v-pills-profile-tab"

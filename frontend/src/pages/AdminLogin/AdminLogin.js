@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import {
   loadCaptchaEnginge,
@@ -6,21 +6,41 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AdminContext from "../../context/AdminContext";
 
-const Login = () => {
+const AdminLogin = () => {
   const [captchaText, setCaptchaText] = useState("");
+  const [adminId, setAdminId] = useContext(AdminContext);
+  const [adminPassword, setAdminPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (validateCaptcha(captchaText) === true) {
-      alert("Captcha Matched");
-    } else {
-      alert("Captcha Does Not Match");
+    console.log(adminId);
+    console.log(adminPassword);
+    try{
+      const response = await axios.post("http://localhost:8080/admin-login", {
+        id: adminId,
+        password: adminPassword,
+      });
+      console.log(response);
     }
+    catch(error){
+      alert(error.response.data);
+      return;
+    }
+    
+    if (validateCaptcha(captchaText) === false) {
+      alert("Captcha Does Not Match");
+      return;
+    }
+    navigate("/admin-dashboard");
   };
 
   return (
@@ -44,7 +64,9 @@ const Login = () => {
                     type="text"
                     id="form3Example3"
                     className="form-control form-control-lg"
-                    placeholder="Enter a valid user Id"
+                    placeholder="Enter Admin Id"
+                    value={adminId}
+                    onChange={(e) => setAdminId(e.target.value)}
                     required
                   />
                 </div>
@@ -54,6 +76,8 @@ const Login = () => {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={adminPassword}
+                    onChange={(e) => setAdminPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -104,4 +128,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

@@ -20,7 +20,7 @@
     width: 150px;
 }
 
-.form {
+.form, .student-details {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +62,7 @@
     overflow-x: hidden;
 }
 
-.register-student-form {
+.register-student-form, .create-schedule-form, .push-notification-form {
     padding: 20px;
     /* align-items: start; */
     display: block;

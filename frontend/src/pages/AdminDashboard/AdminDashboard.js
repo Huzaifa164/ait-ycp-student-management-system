@@ -1,11 +1,11 @@
-import React from 'react'
-import AdminHeader from '../../components/AdminHeader/AdminHeader'
-import AdminNavBar from '../../components/AdminNavBar/AdminNavBar'
-import Footer from '../../components/Footer/Footer'
+import React from "react";
+import AdminHeader from "../../components/AdminHeader/AdminHeader";
+import AdminNavBar from "../../components/AdminNavBar/AdminNavBar";
+import Footer from "../../components/Footer/Footer";
 
 const AdminDashboard = () => {
   return (
-    <div className='dashboard'>
+    <div className="dashboard">
       <AdminHeader />
       <div className="main">
         <AdminNavBar />
@@ -13,7 +13,7 @@ const AdminDashboard = () => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;
