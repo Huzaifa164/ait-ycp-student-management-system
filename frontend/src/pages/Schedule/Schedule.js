@@ -1,51 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import StudentsHeader from "../../components/StudentHeader/StudentsHeader";
+import axios from "axios";
 
 const Schedule = () => {
-  const [schedule, setSchedule] = useState([
-    {
-      id: 1,
-      type: "TH",
-      date: "1/2/2023",
-      module: "java",
-      faculty: "john doe",
-      time: "9:00 am to 12:00 pm",
-    },
-    {
-      id: 2,
-      type: "TH",
-      date: "1/2/2023",
-      module: "java",
-      faculty: "john doe",
-      time: "9:00 am to 12:00 pm",
-    },
-    {
-      id: 3,
-      type: "TH",
-      date: "1/2/2023",
-      module: "java",
-      faculty: "john doe",
-      time: "9:00 am to 12:00 pm",
-    },
-    {
-      id: 4,
-      type: "TH",
-      date: "1/2/2023",
-      module: "java",
-      faculty: "john doe",
-      time: "9:00 am to 12:00 pm",
-    },
-    {
-      id: 5,
-      type: "TH",
-      date: "1/2/2023",
-      module: "java",
-      faculty: "john doe",
-      time: "9:00 am to 12:00 pm",
-    },
-  ]);
+  const [schedule, setSchedule] = useState([]);
+
+  const getSchedule = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/getSchedule_all");
+      console.log(response.data);
+      setSchedule(response.data)
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    getSchedule();
+  }, []);
   return (
     <div className="dashboard">
       <StudentsHeader />
@@ -67,11 +41,11 @@ const Schedule = () => {
               {schedule &&
                 schedule.map((element) => (
                   <tr key={element.id}>
-                    <td>{element.type}</td>
-                    <td>{element.date}</td>
-                    <td>{element.module}</td>
-                    <td>{element.faculty}</td>
-                    <td>{element.time}</td>
+                    <td>{element.lectureType}</td>
+                    <td>{element.lectureDate}</td>
+                    <td>{element.course.courseName}</td>
+                    <td>{element.facultyName}</td>
+                    <td>{element.startTime} to {element.endTime}</td>
                   </tr>
                 ))}
             </tbody>

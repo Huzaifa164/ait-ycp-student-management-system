@@ -115,7 +115,7 @@ const RegisterStudent = () => {
             </div>
             <div className="form-group">
               <label for="exampleInputGender">
-                Enter Joining Month and Year
+                Enter Gender
               </label>
               <select
                 class="form-control"

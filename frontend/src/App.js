@@ -78,7 +78,7 @@ function App() {
               }
             />
             <Route
-              path="/edit-student"
+              path="/edit-student/:prn"
               element={
                 <AdminProtectedRoute>
                   <EditStudent />
@@ -86,7 +86,7 @@ function App() {
               }
             />
             <Route
-              path="/edit-schedule"
+              path="/edit-schedule/:id"
               element={
                 <AdminProtectedRoute>
                   <EditSchedule />

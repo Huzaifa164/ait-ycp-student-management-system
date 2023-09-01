@@ -46,7 +46,7 @@ const EditPushNotification = () => {
   return (
     <div className="dashboard">
       <AdminHeader />
-      <div className="main">
+      <div className="main"> 
         <AdminNavBar />
         <div className="bg-light content-section">
           <h2 className="mt-3 text-center mb-5">Push Notification</h2>
