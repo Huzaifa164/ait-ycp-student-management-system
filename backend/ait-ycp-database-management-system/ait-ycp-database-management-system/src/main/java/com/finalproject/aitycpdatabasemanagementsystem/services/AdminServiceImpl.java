@@ -27,14 +27,12 @@ public class AdminServiceImpl implements AdminService {
 		Admin admin2 = adminDao.findById(id).orElse(null);
 		System.out.println("After");
 		if(admin2 == null) {
-			System.out.println("Id Not Registered");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id Not Registered");
 		}
 		boolean isPasswordCorrect = password.equals(admin2.getPassword());
 		if(!isPasswordCorrect) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect Password");
 		}
-		System.out.println("Before Admin Response");
 		AdminResponse adminResponse = new AdminResponse();
 		adminResponse.setId(id);
 		System.out.println(adminResponse);

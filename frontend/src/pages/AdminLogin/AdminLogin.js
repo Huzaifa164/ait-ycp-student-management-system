@@ -8,11 +8,11 @@ import {
 } from "react-simple-captcha";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import AdminContext from "../../context/AdminContext";
+import AuthContext from "../../context/AuthContext";
 
 const AdminLogin = () => {
   const [captchaText, setCaptchaText] = useState("");
-  const [adminId, setAdminId] = useContext(AdminContext);
+  const [adminId, setAdminId] = useContext(AuthContext);
   const [adminPassword, setAdminPassword] = useState("");
   const navigate = useNavigate();
 
@@ -24,18 +24,17 @@ const AdminLogin = () => {
     e.preventDefault();
     console.log(adminId);
     console.log(adminPassword);
-    try{
+    try {
       const response = await axios.post("http://localhost:8080/admin-login", {
         id: adminId,
         password: adminPassword,
       });
       console.log(response);
-    }
-    catch(error){
+    } catch (error) {
       alert(error.response.data);
       return;
     }
-    
+
     if (validateCaptcha(captchaText) === false) {
       alert("Captcha Does Not Match");
       return;

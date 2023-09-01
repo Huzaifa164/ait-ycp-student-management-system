@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import {
   loadCaptchaEnginge,
@@ -7,24 +7,41 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 
 const StudentLogin = () => {
   const [captchaText, setCaptchaText] = useState("");
+  const [prn, setPrn] = useContext(AuthContext);
+  const [firstName, setFirstName] = useContext(AuthContext);
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (validateCaptcha(captchaText) === true) {
-      alert("Captcha Matched");
-    } else {
+    console.log(prn);
+    console.log(password);
+    try {
+      const response = await axios.post("http://localhost:8080/student-login", {
+        prn,
+        password,
+      });
+      console.log(response);
+      setFirstName(response.data.firstName);
+    } catch (error) {
+      console.log(error.response.data);
+      alert(error.response.data);
+      return;
+    }
+    if (validateCaptcha(captchaText) === false) {
       alert("Captcha Does Not Match");
       return;
     }
-    navigate('/student-dashboard');
+    navigate("/student-dashboard");
   };
 
   return (
@@ -45,10 +62,12 @@ const StudentLogin = () => {
                 <img src="./images/ycp-logo.jpeg" className="logo mb-5" />
                 <div className="form-outline mb-4">
                   <input
-                    type="text"
+                    type="number"
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter PRN"
+                    value={prn}
+                    onChange={(e) => setPrn(e.target.value)}
                     required
                   />
                 </div>
@@ -58,6 +77,8 @@ const StudentLogin = () => {
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
@@ -100,7 +121,8 @@ const StudentLogin = () => {
                 </div>
                 <div className="text-center">
                   <p>
-                    Not a member? <NavLink to='/register-student'>Register</NavLink>
+                    Not a member?{" "}
+                    <NavLink to="/register-student">Register</NavLink>
                   </p>
                 </div>
               </form>

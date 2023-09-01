@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import StudentsHeader from "../../components/StudentHeader/StudentsHeader";
+import axios from "axios";
 
 const Notification = () => {
-  const [notification, setNotification] = useState([
-    { id: 1, title: "demo", description: "This is test description." },
-    { id: 2, title: "demo", description: "This is test description." },
-    { id: 3, title: "demo", description: "This is test description." },
-    { id: 4, title: "demo", description: "This is test description." },
-  ]);
+  const [notification, setNotification] = useState([]);
+
+  const getNotifications = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/notifications"
+      );
+      console.log(response.data);
+      setNotification(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getNotifications();
+  }, []);
 
   return (
     <div className="dashboard">
@@ -23,6 +35,7 @@ const Notification = () => {
               <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
+                <th scope="col">Time stamp</th>
               </tr>
             </thead>
             <tbody>
@@ -31,6 +44,7 @@ const Notification = () => {
                   <tr key={element.id}>
                     <td>{element.title}</td>
                     <td>{element.description}</td>
+                    <td>{element.timestamp}</td>
                   </tr>
                 ))}
             </tbody>

@@ -17,39 +17,128 @@ import HomePage from "./pages/HomePage/HomePage";
 import StudentLogin from "./pages/StudentLogin/StudentLogin";
 import EditStudent from "./pages/EditStudent/EditStudent";
 import EditSchedule from "./pages/EditSchedule/EditSchedule";
-import { AdminProvider } from "./context/AdminContext";
+import { AuthProvider } from "./context/AuthContext";
+import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
+import StudentProtectedRoute from "./ProtectedRoutes/StudentProtectedRoute";
+import EditPushNotification from "./pages/EditPushNotification/EditPushNotification";
 
 function App() {
   return (
     <div className="App">
-      <AdminProvider>
+      <AuthProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route
+              path="/admin-dashboard"
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              }
+            />
             <Route
               path="/generate-attendence-report"
-              element={<GenerateAttendenceReport />}
+              element={
+                <AdminProtectedRoute>
+                  <GenerateAttendenceReport />
+                </AdminProtectedRoute>
+              }
             />
-            <Route path="/create-schedule" element={<CreateSchedule />} />
-            <Route path="/push-notification" element={<PushNotification />} />
+            <Route
+              path="/create-schedule"
+              element={
+                <AdminProtectedRoute>
+                  <CreateSchedule />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/push-notification"
+              element={
+                <AdminProtectedRoute>
+                  <PushNotification />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit-push-notification/:id"
+              element={
+                <AdminProtectedRoute>
+                  <EditPushNotification />
+                </AdminProtectedRoute>
+              }
+            />
             <Route
               path="/generate-student-report"
-              element={<GenerateStudentReport />}
+              element={
+                <AdminProtectedRoute>
+                  <GenerateStudentReport />
+                </AdminProtectedRoute>
+              }
             />
-            <Route path="/edit-student" element={<EditStudent />} />
-            <Route path="/edit-schedule" element={<EditSchedule />} />
+            <Route
+              path="/edit-student"
+              element={
+                <AdminProtectedRoute>
+                  <EditStudent />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit-schedule"
+              element={
+                <AdminProtectedRoute>
+                  <EditSchedule />
+                </AdminProtectedRoute>
+              }
+            />
             <Route path="/" element={<HomePage />} />
             <Route path="/student-login" element={<StudentLogin />} />
-            <Route path="/student-dashboard" element={<StudentDashboard />} />
-            <Route path="/attendence" element={<Attendence />} />
-            <Route path="/assignments" element={<Assignments />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/notification" element={<Notification />} />
+            <Route
+              path="/student-dashboard"
+              element={
+                <StudentProtectedRoute>
+                  <StudentDashboard />
+                </StudentProtectedRoute>
+              }
+            />
+            <Route
+              path="/attendence"
+              element={
+                <StudentProtectedRoute>
+                  <Attendence />
+                </StudentProtectedRoute>
+              }
+            />
+            <Route
+              path="/assignments"
+              element={
+                <StudentProtectedRoute>
+                  <Assignments />
+                </StudentProtectedRoute>
+              }
+            />
+            <Route
+              path="/schedule"
+              element={
+                <StudentProtectedRoute>
+                  <Schedule />
+                </StudentProtectedRoute>
+              }
+            />
+            <Route
+              path="/notification"
+              element={
+                <StudentProtectedRoute>
+                  <Notification />
+                </StudentProtectedRoute>
+              }
+            />
             <Route path="/register-student" element={<RegisterStudent />} />
           </Routes>
         </BrowserRouter>
-      </AdminProvider>
+      </AuthProvider>
     </div>
   );
 }
