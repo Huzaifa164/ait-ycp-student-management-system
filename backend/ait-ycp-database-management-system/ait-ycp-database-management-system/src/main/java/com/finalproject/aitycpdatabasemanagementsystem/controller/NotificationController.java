@@ -23,13 +23,8 @@ import com.finalproject.aitycpdatabasemanagementsystem.entities.Notification;
 @RestController
 @RequestMapping("/api/notifications")
 public class NotificationController {
+	@Autowired(required=false)
 	private NotificationDao notificationDao;
-
-	@Autowired
-	public NotificationController(NotificationDao notificationDao) {
-		super();
-		this.notificationDao = notificationDao;
-	}
 	
 	@PostMapping
 	public Notification createNotification(@RequestBody Notification notification) {

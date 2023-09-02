@@ -51,7 +51,7 @@ const CreateSchedule = () => {
     }
   };
 
-  const handleEdit = async(editId) => {
+  const handleEdit = async (editId) => {
     navigate(`/edit-schedule/${editId}`);
   };
 
@@ -65,9 +65,16 @@ const CreateSchedule = () => {
     }
   };
 
-  const handleDelete = () => {
-
-  }
+  const handleDelete = async (deleteId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/delete_Schedule/${deleteId}`
+      );
+      getSchedule();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   useEffect(() => {
     getSchedule();
@@ -202,14 +209,14 @@ const CreateSchedule = () => {
                       <button
                         type="button"
                         className="btn btn-success mr-3"
-                        onClick={()=>handleEdit(element.id)}
+                        onClick={() => handleEdit(element.id)}
                       >
                         Edit
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(element.id)}
                       >
                         Delete
                       </button>

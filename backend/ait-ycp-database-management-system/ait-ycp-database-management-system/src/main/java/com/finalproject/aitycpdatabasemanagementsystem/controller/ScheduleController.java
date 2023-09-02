@@ -21,10 +21,10 @@ import com.finalproject.aitycpdatabasemanagementsystem.entities.Schedule;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ScheduleController {
-	@Autowired
+	@Autowired(required=false)
     private  CoursesDao course;
 	
-	@Autowired
+	@Autowired(required=false)
     private ScheduleDao schedule;
 	
 	@PostMapping("/addSchedule")
@@ -39,7 +39,7 @@ public class ScheduleController {
 		return (List<Schedule>)schedule.findAll();		
 	}
 	
-	@GetMapping("/getSchedule/{Id}")
+	@GetMapping("/getSchedule/{id}")
 	public Optional<Schedule> getSchedule(@PathVariable int id) {
 		return this.schedule.findById(id);
 	}

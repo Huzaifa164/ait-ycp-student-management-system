@@ -9,11 +9,13 @@ const StudentsHeader = () => {
   const handleLogout = () => {
     setFirstName("");
     setPrn("");
+    localStorage.removeItem("prn");
+    localStorage.removeItem("firstName");
     navigate("/");
   };
   return (
     <div className="student-header">
-      <h1>Welcome {firstName}</h1>
+      <h1>Welcome {localStorage.getItem("firstName")}</h1>
       <NavLink to="/" type="button" class="btn btn-primary" onClick={handleLogout}>
         Logout
       </NavLink>

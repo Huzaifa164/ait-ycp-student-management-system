@@ -32,6 +32,8 @@ const StudentLogin = () => {
       });
       console.log(response);
       setFirstName(response.data.firstName);
+      localStorage.setItem("prn", prn);
+      localStorage.setItem("firstName", response.data.firstName);
     } catch (error) {
       console.log(error.response.data);
       alert(error.response.data);

@@ -30,6 +30,7 @@ const AdminLogin = () => {
         password: adminPassword,
       });
       console.log(response);
+      localStorage.setItem("adminId", adminId);
     } catch (error) {
       alert(error.response.data);
       return;

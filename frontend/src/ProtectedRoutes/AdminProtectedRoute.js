@@ -6,7 +6,7 @@ const AdminProtectedRoute = ({ children }) => {
   const [adminId, setAdminId] = useContext(AuthContext);
   let location = useLocation();
 
-  if (adminId === "") {
+  if (!(localStorage.getItem("adminId"))) {
     return <Navigate to="/admin-login" state={{ from: location }} replace />;
   }
   return children;

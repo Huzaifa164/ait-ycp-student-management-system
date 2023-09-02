@@ -8,11 +8,12 @@ const AdminHeader = () => {
 
   const handleLogout = () => {
     setAdminId("");
+    localStorage.removeItem("adminId");
     navigate("/");
   };
   return (
     <div className="admin-header">
-      <h1>Welcome {adminId}</h1>
+      <h1>Welcome {localStorage.getItem("adminId")}</h1>
       <button type="button" class="btn btn-primary" onClick={handleLogout}>
         Logout
       </button>

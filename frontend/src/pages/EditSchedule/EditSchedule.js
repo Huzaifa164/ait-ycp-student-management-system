@@ -25,14 +25,38 @@ const EditSchedule = () => {
     { courseId: 8, courseName: "Software Engineering" },
   ];
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
-    navigate("/create-schedule");
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/update_Schedule/${id}`,
+        {
+          id,
+          course: { courseId: courses },
+          facultyName,
+          lectureType,
+          lectureDate,
+          startTime,
+          endTime,
+        }
+      );
+      navigate("/create-schedule");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const getSchedule = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/getSchedule/${id}`);
+      const response = await axios.get(
+        `http://localhost:8080/getSchedule/${id}`
+      );
+      setCourses(response.data.course);
+      setFacultyName(response.data.facultyName);
+      setLactureType(response.data.lectureType);
+      setLectureDate(response.data.lectureDate);
+      setStartTime(response.data.startTime);
+      setEndTime(response.data.endTime);
     } catch (error) {
       alert(error);
     }
@@ -59,7 +83,7 @@ const EditSchedule = () => {
                 class="form-control"
                 id="exampleInputCourse"
                 required
-                value={courses}
+                value={courses.courseName}
                 onChange={(e) => setCourses(e.target.value)}
               >
                 {courseArray &&
